@@ -1,6 +1,4 @@
-
 # EX 4A Kadane's Algorithm - Dynamic Programming. 
-## DATE:
 ## AIM:
 To Write a Java program to solve the below problem using Kadane's Algorithm.
 A solar company installs solar panels around a circular grid of n buildings. Each building either generates or consumes net energy, represented by integers (+ve for generated, -ve for consumed).
@@ -20,23 +18,82 @@ A single integer: Maximum net energy collectable from a contiguous block (wrappi
 Constraints:
 1 <= n <= 10^6
 ## Algorithm
-1. 
-2. 
-3. 
-4.  
-5.   
+
+1. Start and read the number of solar panels and their energy values into an array.
+2.Calculate the total sum of all energy values.
+
+3.Find the maximum subarray sum (non-circular case) using Kadane’s algorithm.
+
+4.Find the minimum subarray sum and compute the circular sum as totalSum - minSum.
+
+5.Return the maximum of maxSum and circularSum (handle all-negative case separately).
 
 ## Program:
-```
-/*
+
 Program to implement Reverse a String
-Developed by: 
-Register Number:  
-*/
+## Developed by: SHARON CLARA A
+## Register Number: 212224040310 
+```
+
+import java.util.*;
+
+public class SolarEnergyMaximizer {
+
+    public static int maxCircularEnergy(int[] energy)     {
+        //Type your code
+        int sum=0;
+        for(int i: energy){
+            sum+=i;
+        }
+        int maxSum=maxSubArraySum(energy);
+        int minSum=minSubArraySum(energy);
+        int wrappedDifference=sum-minSum;
+        if(maxSum<0) return maxSum;
+        return Math.max(maxSum,wrappedDifference);
+        
+    }
+    
+    public static int maxSubArraySum(int[] energy){
+        int sum=0,maxSum=energy[0];
+        for(int i:energy){
+            sum+=i;
+            if(sum>maxSum){
+                maxSum=sum;
+            }
+            if(sum<0) sum=0;
+        }
+        return maxSum;
+    }
+    
+    public static int minSubArraySum(int[] energy){
+        int sum=0,minSum=energy[0];
+        for(int i:energy){
+            sum+=i;
+            if(sum<minSum) minSum=sum;
+            if(sum>0) sum=0;
+        }
+        return minSum;
+    }
+
+    
+    
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] energy = new int[n];
+        for (int i = 0; i < n; i++) {
+            energy[i] = sc.nextInt();
+        }
+        System.out.println(maxCircularEnergy(energy));
+    }
+}
+
 ```
 
 ## Output:
 
+<img width="402" height="223" alt="650880167-55a00501-8997-4a09-8375-c0e1cc4377f6" src="https://github.com/user-attachments/assets/1208f029-2da9-4d40-9731-5bff541edc97" />
 
 
 ## Result:
